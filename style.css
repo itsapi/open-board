@@ -1,0 +1,16 @@
+html {
+	width: 100%;
+}
+body {
+	width: 80%;
+}
+#post {
+	height: 200px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+}
+#board {
+	width: 100%;
+	margin-top: 200px;
+}
