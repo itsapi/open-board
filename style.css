@@ -1,0 +1,31 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+html {
+	width: 100%;
+	background-color: white;
+}
+body {
+	font-family: 'Noto Sans';
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+}
+#post {
+	height: 100px;
+	width: inherit;
+	background-color: white;
+	position: fixed;
+	top: 0;
+}
+#post textarea {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+}
+#post input {
+	display: block;
+	margin: 0 auto;
+}
+#board {
+	width: 100%;
+	margin-top: 100px;
+}
