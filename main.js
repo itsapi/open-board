@@ -1,6 +1,7 @@
 function submitPost() {
-	$.ajax('savePost.php', {
-		data: document.getElementById('newPost'),
+	$.ajax({
+		url: 'savePost.php',
+		data: $('textarea#newPost').val(),
 		success: function (data, status, jqXHR){
 			alert(data);
 		}
