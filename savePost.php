@@ -1,2 +1,2 @@
 <?
-	echo $_GET['data'];
+	echo 'hello' . $_GET['data'];

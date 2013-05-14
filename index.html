@@ -6,17 +6,7 @@
 		<link rel="stylesheet" href="normalize.css">
 		<link rel="stylesheet" href="style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-		<script>
-			function submitPost() {
-				$.ajax({
-					url: 'savePost.php',
-					data: document.getElementById('newPost'),
-					success: function (data, status, jqXHR){
-						alert(data);
-					}
-				});
-			}
-		</script>
+		<script src="main.js"></script>
 	</head>
 	<body>
 		<section id="board">
