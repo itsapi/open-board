@@ -3,6 +3,7 @@ html {
 }
 body {
 	width: 80%;
+	margin: 0 auto;
 }
 #post {
 	height: 200px;
