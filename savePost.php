@@ -1,0 +1,2 @@
+<?
+	echo $_GET['data'];
