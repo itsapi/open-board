@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+
 html {
 	width: 100%;
 	background-color: white;
@@ -9,6 +10,7 @@ body {
 	width: 80%;
 	margin: 0 auto;
 }
+
 #post {
 	height: 100px;
 	width: inherit;
@@ -25,7 +27,15 @@ body {
 	display: block;
 	margin: 0 auto;
 }
+
 #board {
 	width: 100%;
 	margin-top: 100px;
+}
+#board li {
+	list-style: none;
+	margin: 10px;
+	margin-left: -30px;
+	padding: 20px;
+	border: 1px solid rgba(125, 125, 125, .5);
 }
