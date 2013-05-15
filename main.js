@@ -35,11 +35,12 @@ function resizeElm() {
 }
 
 var defaultLoad = 10
+var noLoaded = 0
 
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
-	receivePosts();
 
+	receivePosts();
 	setInterval(receivePosts, 2000);
 });
