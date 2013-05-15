@@ -1,2 +1,2 @@
 <?
-	echo 'hello' . $_REQUEST['postContent'];
+	echo 'Your post: ' . $_POST['postContent'];

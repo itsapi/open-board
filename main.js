@@ -1,10 +1,10 @@
 function submitPost() {
-	var postContent = $('#newPost').val()
 	$.ajax({
 		url: 'savePost.php',
-		data: postContent,
-		success: function (data, status, jqXHR){
-			alert(data);
+		type: 'post',
+		data: {postContent: $('#newPost').val()},
+		success: function (post){
+			alert(post);
 		}
 	});
 }
