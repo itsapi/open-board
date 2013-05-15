@@ -12,7 +12,7 @@ body {
 }
 
 #post {
-	height: 100px;
+	height: 130px;
 	width: inherit;
 	background-color: white;
 	position: fixed;
@@ -20,8 +20,8 @@ body {
 }
 #post textarea {
 	display: block;
-	width: 90%;
-	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid rgba(125, 125, 125, .5);
 }
 #post input {
 	display: block;
@@ -30,12 +30,14 @@ body {
 
 #board {
 	width: 100%;
-	margin-top: 100px;
+	margin-top: 130px;
 }
 #board li {
 	list-style: none;
-	margin: 10px;
-	margin-left: -30px;
+	margin: 10px 0;
 	padding: 20px;
 	border: 1px solid rgba(125, 125, 125, .5);
+}
+#board ol {
+	padding: 0;
 }
