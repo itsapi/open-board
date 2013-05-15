@@ -1,6 +1,5 @@
 function submitPost() {
 	var newPost = $('#newPost').val().replace(/\n+/g,"<br>") + '\n';
-	$('#newPost').val('');
 	$.ajax({
 		url: 'savePost.php',
 		type: 'post',
@@ -15,27 +14,15 @@ $(window).scroll(function()
 {
     if($(window).scrollTop() == $(document).height() - $(window).height())
     {
-        $('div#loadmoreajaxloader').show();
-        $.ajax({
-        url: "viewPosts.php",
-        success: function(html)
-        {
-            if(html)
-            {
-                $("#board ul").append(html);
-                $('div#loadmoreajaxloader').hide();
-            }else
-            {
-                $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
-            }
-        }
-        });
+        $('div#loadmore').show();
+        receivePosts();
     }
+});
 
 function receivePosts() {
 	$.get('posts.txt', function(posts) {
 		var splitPosts = posts.split('\n');
-		$('#board ol').html(function () {
+		$('#board ul').html(function () {
 			if (splitPosts.length < defaultLoad) {
 				var no = splitPosts.length;
 			} else {
