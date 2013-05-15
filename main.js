@@ -10,7 +10,7 @@ function submitPost() {
 		}
 	});
 }
-<<<<<<< HEAD
+
 $(window).scroll(function()
 {
     if($(window).scrollTop() == $(document).height() - $(window).height())
@@ -31,7 +31,6 @@ $(window).scroll(function()
         }
         });
     }
-=======
 
 function receivePosts() {
 	$.get('posts.txt', function(posts) {
@@ -65,5 +64,4 @@ $(document).ready(function () {
 
 	receivePosts();
 	setInterval(receivePosts, 2000);
->>>>>>> 2aba30bcfa5fce642f6411b7b245b9832f2e8e7f
 });
