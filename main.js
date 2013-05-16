@@ -26,7 +26,7 @@ $(window).scroll(function() {
 					length: noLines
 				}).done(function(posts) {
 					$.each(posts.items, function (i, item) {
-						$('#board ul').append(item.post);
+						$('#board ul').append(item);
 					});
 				});
 
