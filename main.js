@@ -5,7 +5,7 @@ function submitPost() {
 		type: 'post',
 		data: {postContent: newPost},
 		success: function (post){
-			receivePosts();
+			loadNew();
 		}
 	});
 }
