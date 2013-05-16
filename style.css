@@ -38,6 +38,6 @@ body {
 	padding: 20px;
 	border: 1px solid rgba(125, 125, 125, .5);
 }
-#board ol {
+#board ul {
 	padding: 0;
 }
