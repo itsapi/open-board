@@ -3,10 +3,10 @@ function submitPost() {
 	$.ajax({
 		url: 'savePost.php',
 		type: 'post',
-		data: {postContent: newPost},
-		success: function (post){
-			loadNew();
-		}
+		data: {postContent: newPost}
+	}).done(function (post){
+		loadNew();
+		$('#newPost').val('');
 	});
 }
 
@@ -27,6 +27,7 @@ $(window).scroll(function() {
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').append('<li>' + item + '</li>');
+						noLoaded++
 					});
 				});
 
@@ -50,6 +51,7 @@ function loadNew() {
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + item + '</li>');
+						noLoaded++
 					});
 				});
 			}
