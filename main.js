@@ -38,24 +38,24 @@ $(window).scroll(function() {
     }
 });
 
-function receivePosts() {
-	var loadMoreContent = '';
-	$.get('posts.txt', function(posts) {
-		var splitPosts = posts.split('\n');
-		$('#board ul').html(function () {
-			if (splitPosts.length < defaultLoad) {
-				var no = splitPosts.length;
-			} else {
-				var no = defaultLoad;
-			};
-			
-			var out = '';
-			for (var i = splitPosts.length-2; i >= (splitPosts.length - no); i--) {
-				out = out + '<li>' + splitPosts[i] + '</li>';
-			};
-			return out;
+function loadNew() {
+	if($(window).scrollTop() == 0) {
+		$.ajax({
+			url: 'noPosts.php',
+			type: 'post'
+		}).done(function (fileLength) {
+			if (fileLength > noLoaded) {
+				$.getJSON('getPosts.php', {
+					from: (noLoaded+1),
+					length: (fileLength-noLoaded)
+				}).done(function(posts) {
+					$.each(posts, function (i, item) {
+						$('#board ul').prepend('<li>' + item + '</li>');
+					});
+				});
+			}
 		});
-	});
+	}
 }
 
 function resizeElm() {
@@ -69,6 +69,6 @@ $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
 
-	receivePosts();
-	setInterval(receivePosts, 5000);
+	loadNew();
+	setInterval(loadNew, 5000);
 });
