@@ -18,8 +18,10 @@ $(window).scroll(function() {
 		}).done(function(noLines) {
 			totalLines = noLines;
 			if (noLoaded < noLines) {
-				if (noLoaded + defaultLoad < noLines) {
-					noLines = noLoaded + defaultLoad;
+				if (totalLines - noLoaded < defaultLoad) {
+					noLines = totalLines - noLoaded;
+				} else {
+					noLines = defaultLoad;
 				}
 				$.getJSON('getPosts.php', {
 					from: totalLines - noLoaded - noLines,
@@ -27,6 +29,7 @@ $(window).scroll(function() {
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').append('<li>' + item + '</li>');
+						noLoaded++
 					});
 				});
 
@@ -50,6 +53,7 @@ function loadNew() {
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + item + '</li>');
+						noLoaded++
 					});
 				});
 			}
