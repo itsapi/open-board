@@ -42,7 +42,6 @@ function loadNew() {
 	if($(window).scrollTop() == 0) {
 		$.ajax({
 			url: 'noPosts.php',
-			type: 'post'
 		}).done(function (fileLength) {
 			if (fileLength > noLoaded) {
 				$.getJSON('getPosts.php', {
