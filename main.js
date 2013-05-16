@@ -27,9 +27,6 @@ function receivePosts(noRequest) {
 		$('#board ul').html(function () {
 			if (splitPosts.length < noRequest) {
 				var no = splitPosts.length;
-				if (noRequest > noLoaded) {
-					loadMoreContent = '<center>No more posts to show.</center>';
-				}
 			} else {
 				var no = noRequest;
 			};
@@ -41,11 +38,7 @@ function receivePosts(noRequest) {
 			return out;
 		});
 	});
-	if (loadMoreContent == '') {
-		$('div#loadmore').hide();
-	} else {
-		$('div#loadmore').html(loadMoreContent);
-	}
+	$('div#loadmore').hide();
 	noLoaded = noRequest;
 }
 
