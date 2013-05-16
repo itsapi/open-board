@@ -18,8 +18,10 @@ $(window).scroll(function() {
 		}).done(function(noLines) {
 			totalLines = noLines;
 			if (noLoaded < noLines) {
-				if (noLoaded + defaultLoad < noLines) {
-					noLines = noLoaded + defaultLoad;
+				if (totalLines - noLoaded < defaultLoad) {
+					noLines = totalLines - noLoaded;
+				} else {
+					noLines = defaultLoad;
 				}
 				$.getJSON('getPosts.php', {
 					from: totalLines - noLoaded - noLines,
