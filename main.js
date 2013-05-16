@@ -15,18 +15,23 @@ $(window).scroll(function()
     if($(window).scrollTop() == $(document).height() - $(window).height())
     {
         $('div#loadmore').show();
-        receivePosts();
+        receivePosts(noLoaded + defaultLoad);
     }
 });
 
-function receivePosts() {
+function receivePosts(noRequest) {
+	noRequest = typeof noRequest !== 'undefined' ? noRequest : defaultLoad;
+	var loadMoreContent = '';
 	$.get('posts.txt', function(posts) {
 		var splitPosts = posts.split('\n');
 		$('#board ul').html(function () {
-			if (splitPosts.length < defaultLoad) {
+			if (splitPosts.length < noRequest) {
 				var no = splitPosts.length;
+				if (noRequest > noLoaded) {
+					loadMoreContent = '<center>No more posts to show.</center>';
+				}
 			} else {
-				var no = defaultLoad;
+				var no = noRequest;
 			};
 			
 			var out = '';
@@ -36,6 +41,12 @@ function receivePosts() {
 			return out;
 		});
 	});
+	if (loadMoreContent == '') {
+		$('div#loadmore').hide();
+	} else {
+		$('div#loadmore').html(loadMoreContent);
+	}
+	noLoaded = noRequest;
 }
 
 function resizeElm() {
@@ -50,5 +61,5 @@ $(document).ready(function () {
 	$(window).resize(resizeElm);
 
 	receivePosts();
-	setInterval(receivePosts, 2000);
+	setInterval(receivePosts, 5000);
 });
