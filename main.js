@@ -25,8 +25,8 @@ $(window).scroll(function() {
 					from: totalLines - noLoaded - noLines,
 					length: noLines
 				}).done(function(posts) {
-					$.each(posts.items, function (i, item) {
-						$('#board ul').append(item);
+					$.each(posts, function (i, item) {
+						$('#board ul').append('<li>' + item + '</li>');
 					});
 				});
 
