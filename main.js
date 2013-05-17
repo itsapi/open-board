@@ -24,7 +24,7 @@ $(window).scroll(function() {
 					noLines = defaultLoad;
 				}
 				$.getJSON('getPosts.php', {
-					from: Math.abs(totalLines-noLoaded-noLines-1),
+					from: (((totalLines-noLoaded-noLines-1) < 1) ? 1 : (totalLines-noLoaded-noLines-1)),
 					to: (totalLines-noLoaded-1)
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
@@ -49,7 +49,7 @@ function loadNew(first) {
 			if (fileLength > noPosts) {
 				noPosts = fileLength;
 				if (first == 1) {
-					var lineFrom = (fileLength-defaultLoad);
+					var lineFrom = (((fileLength-defaultLoad) < 1) ? 1 : (fileLength-defaultLoad));
 					var lineTo = fileLength;
 				} else {
 					var lineFrom = (noLoaded+1);
@@ -73,7 +73,7 @@ function resizeElm() {
 	$('#post textarea').css('width', $('#post').width()-43);
 }
 
-var defaultLoad = 10;
+var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
 var noPosts = 0;
 
