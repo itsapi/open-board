@@ -70,7 +70,8 @@ function loadNew(first) {
 }
 
 function resizeElm() {
-	$('#post textarea').css('width', $('#post').width()-43);
+	$('#newPost').css('width', $('#post').width()-43);
+	$('#newPost').css('height', 100);
 }
 
 var defaultLoad = parseInt($(window).height()/50);
