@@ -39,7 +39,7 @@ $(window).scroll(function() {
 					to: (totalLines-noLoaded-1)
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
-						$('#board ul').append('<li>' + item.replace(exp,"<a href='$1'>$1</a>") + '</li>');
+						$('#board ul').append('<li>' + displayPost(item) + '</li>');
 						noLoaded++;
 					});
 				});
@@ -70,13 +70,17 @@ function loadNew(first) {
 					to: lineTo
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
-						$('#board ul').prepend('<li>' + item.replace(exp,"<a href='$1'>$1</a>") + '</li>');
+						$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
 						noLoaded++;
 					});
 				});
 			}
 		});
 	}
+}
+
+function displayPost(item) {
+	return item[0] + ' - ' + item[1].replace(exp,"<a href='$1'>$1</a>");
 }
 
 function resizeElm() {
