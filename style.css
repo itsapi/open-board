@@ -17,6 +17,7 @@ body {
 	background-color: white;
 	position: fixed;
 	top: 0;
+	border-bottom: groove;
 }
 #post textarea {
 	display: block;

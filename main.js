@@ -46,7 +46,8 @@ function loadNew(first) {
 		$.ajax({
 			url: 'noPosts.php',
 		}).done(function (fileLength) {
-			if (fileLength > noLoaded) {
+			if (fileLength > noPosts) {
+				noPosts = fileLength;
 				if (first == 1) {
 					var lineFrom = fileLength - defaultLoad;
 					var lineTo = fileLength;
@@ -72,8 +73,9 @@ function resizeElm() {
 	$('#post textarea').css('width', $('#post').width()-43);
 }
 
-var defaultLoad = 10
-var noLoaded = 0
+var defaultLoad = 10;
+var noLoaded = 0;
+var noPosts = 0;
 
 $(document).ready(function () {
 	resizeElm();
