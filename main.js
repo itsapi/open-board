@@ -73,7 +73,6 @@ function loadNew(first) {
 
 function resizeElm() {
 	$('#newPost').css('width', $('#post').width()-43);
-	$('#newPost').css('height', 100);
 }
 
 var defaultLoad = parseInt($(window).height()/50);

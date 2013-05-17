@@ -12,7 +12,6 @@ body {
 }
 
 #post {
-	height: 130px;
 	width: inherit;
 	background-color: white;
 	position: fixed;
