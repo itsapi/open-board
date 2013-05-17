@@ -1,13 +1,15 @@
 function submitPost() {
-	var newPost = $('#newPost').val().replace(/\n+/g,"<br>") + '\n';
-	$.ajax({
-		url: 'savePost.php',
-		type: 'post',
-		data: {postContent: newPost}
-	}).done(function (post){
-		loadNew();
-		$('#newPost').val('').focus();
-	});
+	if ($('#newPost').val() != '') {
+		var newPost = $('#newPost').val().replace(/\n+/g,"<br>") + '\n';
+		$.ajax({
+			url: 'savePost.php',
+			type: 'post',
+			data: {postContent: newPost}
+		}).done(function (post){
+			loadNew();
+			$('#newPost').val('').focus();
+		});
+	}
 }
 
 $(window).scroll(function() {
