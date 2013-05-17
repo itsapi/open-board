@@ -39,7 +39,7 @@ $(window).scroll(function() {
 					to: (totalLines-noLoaded-1)
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
-						$('#board ul').append('<li>' + item + '</li>');
+						$('#board ul').append('<li>' + item.replace(exp,"<a href='$1'>$1</a>") + '</li>');
 						noLoaded++;
 					});
 				});
@@ -70,7 +70,7 @@ function loadNew(first) {
 					to: lineTo
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
-						$('#board ul').prepend('<li>' + item + '</li>');
+						$('#board ul').prepend('<li>' + item.replace(exp,"<a href='$1'>$1</a>") + '</li>');
 						noLoaded++;
 					});
 				});
@@ -83,6 +83,7 @@ function resizeElm() {
 	$('#newPost').css('width', $('#post').width()-43);
 }
 
+var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
 var noPosts = 0;
