@@ -6,7 +6,7 @@ function submitPost() {
 		data: {postContent: newPost}
 	}).done(function (post){
 		loadNew();
-		$('#newPost').val('');
+		$('#newPost').val('').focus();
 	});
 }
 
@@ -24,10 +24,10 @@ $(window).scroll(function() {
 					noLines = defaultLoad;
 				}
 				$.getJSON('getPosts.php', {
-					from: totalLines - noLoaded - noLines,
-					length: noLines
+					from: totalLines - noLoaded - noLines-1,
+					to: totalLines - noLoaded-1
 				}).done(function(posts) {
-					$.each(posts, function (i, item) {
+					$.each(posts.reverse(), function (i, item) {
 						$('#board ul').append('<li>' + item + '</li>');
 						noLoaded++
 					});
@@ -41,15 +41,22 @@ $(window).scroll(function() {
     }
 });
 
-function loadNew() {
+function loadNew(first) {
 	if($(window).scrollTop() == 0) {
 		$.ajax({
 			url: 'noPosts.php',
 		}).done(function (fileLength) {
 			if (fileLength > noLoaded) {
+				if (first == 1) {
+					var lineFrom = fileLength - defaultLoad;
+					var lineTo = fileLength;
+				} else {
+					var lineFrom = noLoaded+1;
+					var lineTo = fileLength;
+				}
 				$.getJSON('getPosts.php', {
-					from: (noLoaded+1),
-					length: (fileLength-noLoaded)
+					from: lineFrom,
+					to: lineTo
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + item + '</li>');
@@ -72,6 +79,6 @@ $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
 
-	loadNew();
+	loadNew(1);
 	setInterval(loadNew, 5000);
 });
