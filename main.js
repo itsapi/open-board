@@ -11,25 +11,25 @@ function submitPost() {
 }
 
 $(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+    if($(window).scrollTop() == $(document).height()-$(window).height()) {
         $('div#loadmore').show();
         $.ajax({
 			url: 'noPosts.php',
 		}).done(function(noLines) {
 			totalLines = noLines;
 			if (noLoaded < noLines) {
-				if (totalLines - noLoaded < defaultLoad) {
-					noLines = totalLines - noLoaded;
+				if (totalLines-noLoaded < defaultLoad) {
+					noLines = (totalLines-noLoaded);
 				} else {
 					noLines = defaultLoad;
 				}
 				$.getJSON('getPosts.php', {
-					from: totalLines - noLoaded - noLines-1,
-					to: totalLines - noLoaded-1
+					from: Math.abs(totalLines-noLoaded-noLines-1),
+					to: (totalLines-noLoaded-1)
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
 						$('#board ul').append('<li>' + item + '</li>');
-						noLoaded++
+						noLoaded++;
 					});
 				});
 
@@ -49,10 +49,10 @@ function loadNew(first) {
 			if (fileLength > noPosts) {
 				noPosts = fileLength;
 				if (first == 1) {
-					var lineFrom = fileLength - defaultLoad;
+					var lineFrom = (fileLength-defaultLoad);
 					var lineTo = fileLength;
 				} else {
-					var lineFrom = noLoaded+1;
+					var lineFrom = (noLoaded+1);
 					var lineTo = fileLength;
 				}
 				$.getJSON('getPosts.php', {
@@ -61,7 +61,7 @@ function loadNew(first) {
 				}).done(function(posts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + item + '</li>');
-						noLoaded++
+						noLoaded++;
 					});
 				});
 			}
