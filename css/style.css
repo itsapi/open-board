@@ -12,6 +12,7 @@ body {
 }
 
 #post {
+	z-index: 1;
 	width: inherit;
 	background-color: white;
 	position: fixed;
