@@ -122,7 +122,6 @@ $(document).ready(function () {
 	$('#post h1').fitText();
 
 	$('div#top').click(function() {
-		console.log('hello world');
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
 		return false;
 	});
