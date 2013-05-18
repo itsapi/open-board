@@ -22,9 +22,9 @@ function submitPost() {
 }
 
 $(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height()-$(window).height()) {
-        $('div#loadmore').show();
-        $.ajax({
+	if($(window).scrollTop() == $(document).height()-$(window).height()) {
+		$('div#loadmore').show();
+		$.ajax({
 			url: 'noPosts.php',
 		}).done(function(noLines) {
 			totalLines = noLines;
@@ -48,7 +48,7 @@ $(window).scroll(function() {
 				$('div#loadmore').html('<center>No more posts to show.</center>');
 			}
 		});
-    }
+	}
 });
 
 function loadNew(first) {
@@ -79,43 +79,32 @@ function loadNew(first) {
 	}
 }
 
-function timeDifference(current, previous) {
+function timeDifference(previous) {
+	var msPerMinute = 60 * 1000;
+	var msPerHour = msPerMinute * 60;
+	var msPerDay = msPerHour * 24;
+	var msPerMonth = msPerDay * 30;
+	var msPerYear = msPerDay * 365;
+	var current = Date.now();
+	var elapsed = current - previous*1000;
 
-    var msPerMinute = 60 * 1000;
-    var msPerHour = msPerMinute * 60;
-    var msPerDay = msPerHour * 24;
-    var msPerMonth = msPerDay * 30;
-    var msPerYear = msPerDay * 365;
-
-    var elapsed = current - previous;
-
-    if (elapsed < msPerMinute) {
-         return Math.round(elapsed/1000) + ' seconds ago';   
-    }
-
-    else if (elapsed < msPerHour) {
-         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-    }
-
-    else if (elapsed < msPerDay ) {
-         return Math.round(elapsed/msPerHour ) + ' hours ago';   
-    }
-
-    else if (elapsed < msPerMonth) {
-        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
-    }
-
-    else if (elapsed < msPerYear) {
-        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
-    }
-
-    else {
-        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
-    }
+	if (elapsed < msPerMinute) {
+		 return Math.round(elapsed/1000) + ' seconds ago';   
+	} else if (elapsed < msPerHour) {
+		 return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+	} else if (elapsed < msPerDay ) {
+		 return Math.round(elapsed/msPerHour ) + ' hours ago';   
+	} else if (elapsed < msPerMonth) {
+		return Math.round(elapsed/msPerDay) + ' days ago';   
+	} else if (elapsed < msPerYear) {
+		return Math.round(elapsed/msPerMonth) + ' months ago';   
+	} else {
+		return Math.round(elapsed/msPerYear ) + ' years ago';   
+	}
 }
 
 function displayPost(item) {
-	return item[0] + ' - ' + item[1].replace(exp,"<a href='$1'>$1</a>");
+	return timeDifference(item[0]) + ' - ' + item[1].replace(exp,"<a href='$1'>$1</a>");
 }
 
 function resizeElm() {
@@ -130,7 +119,6 @@ var noPosts = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
-
 	loadNew(1);
 	setInterval(loadNew, 5000);
 });
