@@ -50,6 +50,12 @@ $(window).scroll(function() {
 			}
 		});
 	}
+
+	if($(window).scrollTop() > $(window).height()) {
+		$('div#top').show();
+	} else {
+		$('div#top').hide();
+	}
 });
 
 function loadNew() {
@@ -114,6 +120,12 @@ $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
 	$('#post h1').fitText(1);
+
+	$('div#top').click(function() {
+		console.log('hello world');
+		$('html, body').animate({ scrollTop: 0 }, 'slow');
+		return false;
+	});
 
 	loadNew(1);
 	setInterval(loadNew, 5000);
