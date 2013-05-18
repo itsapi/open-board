@@ -99,7 +99,7 @@ function timeDifference(previous) {
 }
 
 function displayPost(item) {
-	return timeDifference(item[0]) + ' - ' + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
+	return '<div class="date">' + timeDifference(item[0]) + '</div>' + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
 }
 
 function resizeElm() {
