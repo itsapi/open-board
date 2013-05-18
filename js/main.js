@@ -42,6 +42,7 @@ $(window).scroll(function() {
 						$('#board ul').append('<li>' + displayPost(item) + '</li>');
 						noLoaded++;
 					});
+					$('#board li').emoticonize();
 				});
 				$('div#loadmore').hide();
 			} else {
@@ -51,30 +52,24 @@ $(window).scroll(function() {
 	}
 });
 
-function loadNew(first) {
+function loadNew() {
 	if($(window).scrollTop() == 0) {
 		$.ajax({
 			url: 'noPosts.php',
 		}).done(function (fileLength) {
-			if (fileLength > noPosts) {
-				noPosts = fileLength;
-				if (first == 1) {
-					var lineFrom = (((fileLength-defaultLoad) < 1) ? 1 : (fileLength-defaultLoad));
-					var lineTo = fileLength;
-				} else {
-					var lineFrom = (noLoaded+1);
-					var lineTo = fileLength;
-				}
-				$.getJSON('getPosts.php', {
-					from: lineFrom,
-					to: lineTo
-				}).done(function(posts) {
-					$.each(posts, function (i, item) {
-						$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
-						noLoaded++;
-					});
+			var lineFrom = (fileLength-defaultLoad);
+			var lineTo = fileLength;
+			$.getJSON('getPosts.php', {
+				from: lineFrom,
+				to: lineTo
+			}).done(function(posts) {
+				$('#board ul').html('');
+				$.each(posts, function (i, item) {
+					$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
+					noLoaded++;
 				});
-			}
+				$('#board li').emoticonize();
+			});
 		});
 	}
 }
@@ -104,7 +99,7 @@ function timeDifference(previous) {
 }
 
 function displayPost(item) {
-	return timeDifference(item[0]) + ' - ' + item[1].replace(exp,"<a href='$1'>$1</a>");
+	return timeDifference(item[0]) + ' - ' + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
 }
 
 function resizeElm() {
@@ -114,7 +109,6 @@ function resizeElm() {
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
-var noPosts = 0;
 
 $(document).ready(function () {
 	resizeElm();
