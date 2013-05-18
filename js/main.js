@@ -119,10 +119,9 @@ var noLoaded = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
-	$('#post h1').fitText(1);
+	$('#post h1').fitText();
 
 	$('div#top').click(function() {
-		console.log('hello world');
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
 		return false;
 	});
