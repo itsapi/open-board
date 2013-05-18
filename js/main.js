@@ -52,9 +52,9 @@ $(window).scroll(function() {
 	}
 
 	if($(window).scrollTop() > $(window).height()) {
-		$('div#top').show();
+		$('div#top').css('bottom', 0);
 	} else {
-		$('div#top').hide();
+		$('div#top').css('bottom', -50);
 	}
 });
 
