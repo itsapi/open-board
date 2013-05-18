@@ -26,7 +26,8 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
 #post h1 {
-	width: 70%;
+	width: 100%;
+	max-width: 1000px;
 	text-align: center;
 	margin: 0.2em auto;
 }

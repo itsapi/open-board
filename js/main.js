@@ -113,7 +113,7 @@ var noLoaded = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
-	$('#post h1').fitText();
+	$('#post h1').fitText(1);
 
 	loadNew(1);
 	setInterval(loadNew, 5000);
