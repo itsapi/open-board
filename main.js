@@ -108,7 +108,7 @@ function displayPost(item) {
 }
 
 function resizeElm() {
-	$('#newPost').css('width', $('#post').width()-43);
+	$('#newPost').css('width', $('#post').width()-23);
 }
 
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -119,6 +119,8 @@ var noPosts = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
+	$('#post h1').fitText();
+
 	loadNew(1);
 	setInterval(loadNew, 5000);
 });
