@@ -85,4 +85,9 @@ body {
 	text-align: center;
 	content: 'top';
 	color: white;
+	 -webkit-transition: height 1s ease-in;
+	-moz-transition: height 1s ease-in;
+	-ms-transition: height 1s ease-in;
+	-o-transition: height 1s ease-in;
+	transition: height 1s ease-in;
 }
