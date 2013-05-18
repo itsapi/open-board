@@ -58,11 +58,11 @@ function loadNew() {
 		}).done(function (fileLength) {
 			var lineFrom = (fileLength-defaultLoad);
 			var lineTo = fileLength;
-			$('#board ul').html('');
 			$.getJSON('getPosts.php', {
 				from: lineFrom,
 				to: lineTo
 			}).done(function(posts) {
+				$('#board ul').html('');
 				$.each(posts, function (i, item) {
 					$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
 					noLoaded++;
