@@ -40,9 +40,9 @@ $(window).scroll(function() {
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
 						$('#board ul').append('<li>' + displayPost(item) + '</li>');
+						$('#board li:last-child').emoticonize();
 						noLoaded++;
 					});
-					$('#board li').emoticonize();
 				});
 				$('div#loadmore').hide();
 			} else {
@@ -76,13 +76,13 @@ function loadNew(first) {
 				if (fileLength > noPosts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
+						$('#board li:first-child').emoticonize();
 						noLoaded++;
 						if (first != 1) {
 							$('#board li:last-child').remove();
 							noLoaded--;
 						};
 					});
-					$('#board li').emoticonize();
 				} else {
 					var postsToDelete = (noLoaded-defaultLoad);
 					for (var i=0; i<=(postsToDelete); i++) {
@@ -109,23 +109,23 @@ function timeDifference(previous) {
 	var elapsed = current - previous*1000;
 
 	if (elapsed < msPerMinute) {
-		 return Math.round(elapsed/1000) + ' seconds ago';   
+		 return Math.round(elapsed/1000) + ' seconds ago';
 	} else if (elapsed < msPerHour) {
-		 return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-	} else if (elapsed < msPerDay ) {
-		 return Math.round(elapsed/msPerHour ) + ' hours ago';   
+		 return Math.round(elapsed/msPerMinute) + ' minutes ago';
+	} else if (elapsed < msPerDay) {
+		 return Math.round(elapsed/msPerHour) + ' hours ago';
 	} else if (elapsed < msPerMonth) {
-		return Math.round(elapsed/msPerDay) + ' days ago';   
+		return Math.round(elapsed/msPerDay) + ' days ago';
 	} else if (elapsed < msPerYear) {
-		return Math.round(elapsed/msPerMonth) + ' months ago';   
+		return Math.round(elapsed/msPerMonth) + ' months ago';
 	} else {
-		return Math.round(elapsed/msPerYear ) + ' years ago';   
+		return Math.round(elapsed/msPerYear) + ' years ago';
 	};
 };
 
 function displayPost(item) {
-	var date = new Date(item[0] * 1000).format('Y-m-d') // YYYY-MM-DD
-	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
+	var date = new Date(item[0] * 1000).format('Y-m-d');
+	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
 }
 
 function resizeElm() {
