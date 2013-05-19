@@ -23,7 +23,7 @@ function submitPost() {
 
 $(window).scroll(function() {
 	if($(window).scrollTop() == $(document).height()-$(window).height()) {
-		$('div#loadmore').show();
+		$('#board ul').addClass('loading');
 		$.ajax({
 			url: 'noPosts.php',
 		}).done(function(noLines) {
@@ -44,9 +44,9 @@ $(window).scroll(function() {
 					});
 					$('#board li').emoticonize();
 				});
-				$('div#loadmore').hide();
+				$('#board ul').removeClass('loading');
 			} else {
-				$('div#loadmore').html('<center>No more posts to show.</center>');
+				$('#board ul').addClass('empty');
 			};
 		});
 	};
@@ -108,34 +108,49 @@ function timeDifference(previous) {
 	var current = Date.now();
 	var elapsed = current - previous*1000;
 
+	var plural = 's'
 	if (elapsed < msPerMinute) {
-		 return Math.round(elapsed/1000) + ' seconds ago';   
+		if (Math.round(elapsed/1000) == 1) {plural = ''};
+		return Math.round(elapsed/1000) + ' Second' + plural + ' ago';
 	} else if (elapsed < msPerHour) {
-		 return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+		if (Math.round(elapsed/msPerMinute) == 1) {plural = ''};
+		return Math.round(elapsed/msPerMinute) + ' Minute' + plural + ' ago';
 	} else if (elapsed < msPerDay ) {
-		 return Math.round(elapsed/msPerHour ) + ' hours ago';   
+		if (Math.round(elapsed/msPerHour) == 1) {plural = ''};
+		return Math.round(elapsed/msPerHour ) + ' Hour' + plural + ' ago';
 	} else if (elapsed < msPerMonth) {
-		return Math.round(elapsed/msPerDay) + ' days ago';   
+		if (Math.round(elapsed/msPerDay) == 1) {plural = ''};
+		return Math.round(elapsed/msPerDay) + ' Day' + plural + ' ago';
 	} else if (elapsed < msPerYear) {
-		return Math.round(elapsed/msPerMonth) + ' months ago';   
+		if (Math.round(elapsed/msPerMonth) == 1) {plural = ''};
+		return Math.round(elapsed/msPerMonth) + ' Month' + plural + ' ago';
 	} else {
-		return Math.round(elapsed/msPerYear ) + ' years ago';   
+		if (Math.round(elapsed/msPerYear) == 1) {plural = ''};
+		return Math.round(elapsed/msPerYear ) + ' Year' + plural + ' ago';
 	};
 };
 
 function displayPost(item) {
-	var date = new Date(item[0] * 1000).format('Y-m-d') // YYYY-MM-DD
+	var date = new Date(item[0] * 1000).format('Y-m-d H:i') // YYYY-MM-DDTHH:MM
 	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
 }
 
+function preload(arrayOfImages) {
+    $(arrayOfImages).each(function(){
+        $('<img/>')[0].src = this;
+    });
+}
+
 function resizeElm() {
-	$('#newPost').css('width', $('#post').width()-23);
+	$('#newPost').css('width', $('h1').width()-23);
 };
 
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
 var noPosts = 0;
+
+preload(['ajax-loader.gif']);
 
 $(document).ready(function () {
 	resizeElm();
