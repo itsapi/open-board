@@ -149,6 +149,7 @@ $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
 	$('#post h1').fitText();
+	$('body').append('<div id="top"></div>');
 
 	$('div#top').click(function() {
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
