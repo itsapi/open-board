@@ -40,6 +40,7 @@ $(window).scroll(function() {
 				}).done(function(posts) {
 					$.each(posts.reverse(), function (i, item) {
 						$('#board ul').append('<li>' + displayPost(item) + '</li>');
+						$('#board li:last-child').emoticonize();
 						noLoaded++;
 					});
 					$('#board li').emoticonize();
@@ -76,13 +77,13 @@ function loadNew(first) {
 				if (fileLength > noPosts) {
 					$.each(posts, function (i, item) {
 						$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
+						$('#board li:first-child').emoticonize();
 						noLoaded++;
 						if (first != 1) {
 							$('#board li:last-child').remove();
 							noLoaded--;
 						};
 					});
-					$('#board li').emoticonize();
 				} else {
 					var postsToDelete = (noLoaded-defaultLoad);
 					for (var i=0; i<=(postsToDelete); i++) {
@@ -90,7 +91,7 @@ function loadNew(first) {
 						noLoaded--;
 					};
 					$.each($('#board li').get().reverse(), function (i) {
-						$(this).children('.date').html(timeDifference(posts[i+1][0]));
+						$(this).children('time').html(timeDifference(posts[i+1][0]));
 					});
 				};
 				noPosts = fileLength;
