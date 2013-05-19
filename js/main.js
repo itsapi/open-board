@@ -142,7 +142,7 @@ function resizeElm() {
 	var width = $(window).width();
 	var mql = window.matchMedia("(orientation: portrait)");
 	if ((width > 768) && (width < 1024) && (!mql.matches)) {
-		
+		$(window).off('.FitText');
 	} else {
 		$('#post h1').fitText();
 	}
