@@ -89,8 +89,8 @@ function loadNew(first) {
 						$('#board li:last-child').remove();
 						noLoaded--;
 					};
-					$.each($('#board li'), function (i) {
-						$(this).children('.date').html(timeDifference(posts.reverse()[i][0]));
+					$.each($('#board li').get().reverse(), function (i) {
+						$(this).children('.date').html(timeDifference(posts[i+1][0]));
 					});
 				};
 				noPosts = fileLength;
