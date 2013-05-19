@@ -13,13 +13,13 @@ function submitPost() {
 		var msg = '';
 		if ($('#newPost').val() == '') {
 			msg += 'Your post cannot be blank.\n';
-		}
+		};
 		if ($('#newPost').val().length >= 142) {
 			msg += 'Your post must not be more than 142 characters.\n';
-		}
+		};
 		alert(msg);
-	}
-}
+	};
+};
 
 $(window).scroll(function() {
 	if($(window).scrollTop() == $(document).height()-$(window).height()) {
@@ -33,7 +33,7 @@ $(window).scroll(function() {
 					noLines = (totalLines-noLoaded);
 				} else {
 					noLines = defaultLoad;
-				}
+				};
 				$.getJSON('getPosts.php', {
 					from: (((totalLines-noLoaded-noLines-1) < 1) ? 1 : (totalLines-noLoaded-noLines-1)),
 					to: (totalLines-noLoaded-1)
@@ -47,9 +47,9 @@ $(window).scroll(function() {
 				$('div#loadmore').hide();
 			} else {
 				$('div#loadmore').html('<center>No more posts to show.</center>');
-			}
+			};
 		});
-	}
+	};
 
 	if($(window).scrollTop() > $(window).height()) {
 		$('div#top').css('bottom', 0);
@@ -58,27 +58,46 @@ $(window).scroll(function() {
 	}
 });
 
-function loadNew() {
+function loadNew(first) {
 	if($(window).scrollTop() == 0) {
 		$.ajax({
 			url: 'noPosts.php',
 		}).done(function (fileLength) {
-			var lineFrom = (fileLength-defaultLoad);
+			if ((fileLength <= noPosts) || (first == 1)) {
+				var lineFrom = (((fileLength-defaultLoad) < 1) ? 1 : (fileLength-defaultLoad));
+			} else {
+				var lineFrom = (fileLength-(fileLength-noPosts));
+			};
 			var lineTo = fileLength;
 			$.getJSON('getPosts.php', {
 				from: lineFrom,
 				to: lineTo
 			}).done(function(posts) {
-				$('#board ul').html('');
-				$.each(posts, function (i, item) {
-					$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
-					noLoaded++;
-				});
-				$('#board li').emoticonize();
+				if (fileLength > noPosts) {
+					$.each(posts, function (i, item) {
+						$('#board ul').prepend('<li>' + displayPost(item) + '</li>');
+						noLoaded++;
+						if (first != 1) {
+							$('#board li:last-child').remove();
+							noLoaded--;
+						};
+					});
+					$('#board li').emoticonize();
+				} else {
+					var postsToDelete = (noLoaded-defaultLoad);
+					for (var i=0; i<=(postsToDelete); i++) {
+						$('#board li:last-child').remove();
+						noLoaded--;
+					};
+					$.each($('#board li').get().reverse(), function (i) {
+						$(this).children('.date').html(timeDifference(posts[i+1][0]));
+					});
+				};
+				noPosts = fileLength;
 			});
 		});
-	}
-}
+	};
+};
 
 function timeDifference(previous) {
 	var msPerMinute = 60 * 1000;
@@ -101,8 +120,8 @@ function timeDifference(previous) {
 		return Math.round(elapsed/msPerMonth) + ' months ago';   
 	} else {
 		return Math.round(elapsed/msPerYear ) + ' years ago';   
-	}
-}
+	};
+};
 
 function displayPost(item) {
 	var date = new Date(item[0] * 1000).format('Y-m-d') // YYYY-MM-DD
@@ -111,11 +130,12 @@ function displayPost(item) {
 
 function resizeElm() {
 	$('#newPost').css('width', $('#post').width()-23);
-}
+};
 
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
+var noPosts = 0;
 
 $(document).ready(function () {
 	resizeElm();
