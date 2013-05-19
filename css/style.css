@@ -62,6 +62,11 @@ body {
 	font-variant: small-caps;
 	letter-spacing: 0.1em;
 }
+@media only screen and (orientation : landscape) {
+	#post h1 {
+		width: 50%;
+		color: red;
+	}
 }
 #post h1:hover {
 	text-shadow: 0 2px 3px #bbb;
