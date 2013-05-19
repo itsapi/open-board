@@ -62,9 +62,9 @@ body {
 	font-variant: small-caps;
 	letter-spacing: 0.1em;
 }
-@media only screen and (orientation : landscape) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 	#post h1 {
-		width: 50%;
+		width: 30%;
 		color: red;
 	}
 }
