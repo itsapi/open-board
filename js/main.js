@@ -90,7 +90,7 @@ function loadNew(first) {
 						noLoaded--;
 					};
 					$.each($('#board li').get().reverse(), function (i) {
-						$(this).children('.date').html(timeDifference(posts[i+1][0]));
+						$(this).children('time').html(timeDifference(posts[i+1][0]));
 					});
 				};
 				noPosts = fileLength;
