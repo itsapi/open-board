@@ -138,6 +138,14 @@ function displayPost(item) {
 
 function resizeElm() {
 	$('#newPost').css('width', $('h1').width()-23);
+	
+	var width = $(window).width();
+	var mql = window.matchMedia("(orientation: portrait)");
+	if ((width > 768) && (width < 1024) && (!mql.matches)) {
+		
+	} else {
+		$('#post h1').fitText();
+	}
 };
 
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -148,7 +156,6 @@ var noPosts = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
-	$('#post h1').fitText();
 	$('body').append('<div id="top"></div>');
 
 	$('div#top').click(function() {

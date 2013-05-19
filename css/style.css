@@ -61,10 +61,10 @@ body {
 	text-shadow: 0 2px 3px #ccc;
 	font-variant: small-caps;
 	letter-spacing: 0.1em;
+		font-size: !0.5em;
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 	#post h1 {
-		width: 30%;
 		color: red;
 	}
 }
