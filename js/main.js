@@ -136,12 +136,6 @@ function displayPost(item) {
 	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>"); 
 }
 
-function preload(arrayOfImages) {
-    $(arrayOfImages).each(function(){
-        $('<img/>')[0].src = this;
-    });
-}
-
 function resizeElm() {
 	$('#newPost').css('width', $('h1').width()-23);
 };
@@ -150,8 +144,6 @@ var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~
 var defaultLoad = parseInt($(window).height()/50);
 var noLoaded = 0;
 var noPosts = 0;
-
-preload(['ajax-loader.gif']);
 
 $(document).ready(function () {
 	resizeElm();
