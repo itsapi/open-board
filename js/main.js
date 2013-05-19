@@ -105,7 +105,8 @@ function timeDifference(previous) {
 }
 
 function displayPost(item) {
-	return ('<div class="date">' + timeDifference(item[0]) + '</div> ') + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
+	var date = new Date(item[0] * 1000).format('Y-m-d') // YYYY-MM-DD
+	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>");
 }
 
 function resizeElm() {
