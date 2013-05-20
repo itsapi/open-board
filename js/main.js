@@ -139,14 +139,10 @@ function displayPost(item) {
 function resizeElm() {
 	$('#newPost').css('width', $('h1').width()-23);
 	
-	var width = $(window).width();
-	var mql = window.matchMedia("(orientation: portrait)");
-	if ((width > 768) && (width < 1024) && (!mql.matches)) {
-		$(window).off('.FitText');
-	} else {
-		$('#post h1').fitText();
-	}
 };
+
+function turn() {
+}
 
 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
@@ -156,6 +152,18 @@ var noPosts = 0;
 $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
+	
+	var mql = window.matchMedia("(orientation: portrait)");
+	mql.addListener(function(m) {
+		var width = $(window).width();
+		var mql = window.matchMedia("(orientation: portrait)");
+		if ((width > 768) && (width < 1024) && (m.matches)) {
+			$(window).off('.FitText');
+		} else {
+			$('#post h1').fitText();
+		}
+	});
+
 	$('body').append('<div id="top"></div>');
 
 	$('div#top').click(function() {
