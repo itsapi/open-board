@@ -2,7 +2,7 @@
 
 html {
 	width           : 100%;
-	background-color: rgba(225, 75, 75, 1);
+	background-color: @background_color;
 	overflow-x      : hidden;
 }
 
@@ -13,34 +13,39 @@ body {
 	margin     : 0 auto;
 }
 
+@background_color      : rgba(225, 75, 75, 1);
+@clear_background_color: rgba(225, 75, 75, 0);
+@gradient              : top, @background_color 0%, @background_color 90%, @clear_background_color 100%;
+@linear_gradient       : top bottom, @background_color 0%, @background_color 90%, @clear_background_color 100%;
+@webkit_gradient       : linear, left top, left bottom, color-stop(0%, @background_color), color-stop(90%, @background_color), color-stop(100%, @clear_background_color);
 #post {
 	z-index         : 1;
 	width           : inherit;
-	background-color: rgba(225, 75, 75, 1);
+	background-color: @background_color;
 	position        : fixed;
 	top             : 0;
 	padding-bottom  : 20px;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(225, 75, 75, 1)), color-stop(90%, rgba(225, 75, 75, 1)), color-stop(100%, rgba(225, 75, 75, 0))); /* Chrome,Safari4+ */
-	background: -moz-linear-gradient(    top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* FF3.6+ */
-	background: -webkit-linear-gradient( top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(      top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(     top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* IE10+ */
-	background: linear-gradient(top bottom, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* W3C */
-	filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#E14b4b', endColorstr='#00E14b4b', GradientType=0); /* IE6-9 */
+	background      : -webkit-gradient(        @webkit_gradient); /* Chrome,Safari4+ */
+	background      : -moz-linear-gradient(    @gradient);        /* FF3.6+ */
+	background      : -webkit-linear-gradient( @gradient);        /* Chrome10+,Safari5.1+ */
+	background      : -o-linear-gradient(      @gradient);        /* Opera 11.10+ */
+	background      : -ms-linear-gradient(     @gradient);        /* IE10+ */
+	background      : linear-gradient(         @linear_gradient); /* W3C */
+	filter          : progid:DXImageTransform.Microsoft.gradient(startColorstr='#E14b4b', endColorstr='#00E14b4b', GradientType=0); /* IE6-9 */
 }
 #post:before, #post:after {
 	content   : "";
 	position  : absolute;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(225, 75, 75, 1)), color-stop(90%, rgba(225, 75, 75, 1)), color-stop(100%, rgba(225, 75, 75, 0))); /* Chrome,Safari4+ */
-	background: -moz-linear-gradient(    top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* FF3.6+ */
-	background: -webkit-linear-gradient( top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(      top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(     top, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* IE10+ */
-	background: linear-gradient(top bottom, rgba(225, 75, 75, 1) 0%, rgba(225, 75, 75, 1) 90%, rgba(225, 75, 75, 0) 100%); /* W3C */
-	filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#E14b4b', endColorstr='#00E14b4b', GradientType=0); /* IE6-9 */
+	background      : -webkit-gradient(        @webkit_gradient); /* Chrome,Safari4+ */
+	background      : -moz-linear-gradient(    @gradient);        /* FF3.6+ */
+	background      : -webkit-linear-gradient( @gradient);        /* Chrome10+,Safari5.1+ */
+	background      : -o-linear-gradient(      @gradient);        /* Opera 11.10+ */
+	background      : -ms-linear-gradient(     @gradient);        /* IE10+ */
+	background      : linear-gradient(         @linear_gradient); /* W3C */
+	filter          : progid:DXImageTransform.Microsoft.gradient(startColorstr='#E14b4b', endColorstr='#00E14b4b', GradientType=0); /* IE6-9 */
 	top       : 0;
 	bottom    : 0;
-	width     : 9999px;   /* some huge width */
+	width     : 9999px;
 } 
 #post:before {
 	right: 100%; 
@@ -52,17 +57,21 @@ body {
 	display       : block;
 	width         : 100%;
 	max-width     : 1000px;
-	text-align    : center;
 	margin        : 0.2em auto;
-	font-weight   : 400;
-	color         : rgba(220, 220, 220, 1);
-	border-bottom : 1px solid rgba(204, 204, 204, 1);
-	border-top    : 1px solid rgba(204, 204, 204, 1);
+
+	@border       : 1px solid rgba(204, 204, 204, 1);
+	border-bottom : @border;
+	border-top    : @border;
+	
 	filter        : dropshadow(color=rgba(204, 204, 204, 1), offx=0, offy=3);
 	text-shadow   : 0 1px 3px rgba(204, 204, 204, 1);
+	
+	text-align    : center;
+	color         : rgba(220, 220, 220, 1);
+	font-size     : 0.5em;
+	font-weight   : 400;
 	font-variant  : small-caps;
 	letter-spacing: 0.1em;
-	font-size     : !0.5em;
 }
 #post h1:hover {
 	text-shadow: 0 2px 3px rgba(187, 187, 187, 1);
@@ -81,8 +90,9 @@ body {
 	list-style        : none;
 	margin            : 15px 0;
 	padding           : 20px;
-	-webkit-box-shadow: 0px 0px 2px 0px;
-	box-shadow        : 0px 0px 2px 0px rgba(75, 75, 75, 1);
+	@shadow           : 0px 0px 2px 0px rgba(75, 75, 75, 1);
+	-webkit-box-shadow: @shadow;
+	box-shadow        : @shadow;
 	background-color  : rgba(75, 75, 75, 1);
 	color             : rgba(200, 200, 200, 1);
 }
@@ -122,10 +132,12 @@ body {
 	border-width      : 0px 50px 50px 50px;
 	height            : 0;
 	width             : 0;
-	-moz-transition   : all 1s;
-	-webkit-transition: all 1s;
-	-o-transition     : all 1s;
-	transition        : all 1s;
+	@transition       : all 1s;
+	-moz-transition   : @transition;
+	-ms-transition    : @transition;
+	-webkit-transition: @transition;
+	-o-transition     : @transition;
+	transition        : @transition;
 }
 #top:after {
 	position  : relative;
