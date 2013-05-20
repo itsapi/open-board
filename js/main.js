@@ -153,16 +153,7 @@ $(document).ready(function () {
 	resizeElm();
 	$(window).resize(resizeElm);
 	
-	var mql = window.matchMedia("(orientation: portrait)");
-	mql.addListener(function(m) {
-		var width = $(window).width();
-		var mql = window.matchMedia("(orientation: portrait)");
-		if ((width > 768) && (width < 1024) && (m.matches)) {
-			$(window).off('.FitText');
-		} else {
-			$('#post h1').fitText();
-		}
-	});
+	$('#post h1').fitText();
 
 	$('body').append('<div id="top"></div>');
 
