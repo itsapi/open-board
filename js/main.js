@@ -53,9 +53,27 @@ $(window).scroll(function() {
 	};
 
 	if($(window).scrollTop() > $(window).height()) {
-		$('div#top').css('bottom', 0);
+		$('#top').css('bottom', 0);
 	} else {
-		$('div#top').css('bottom', -50);
+		$('#top').css('bottom', -50);
+	}
+
+	if ($(window).scrollTop() > ($('h1').height()+25)) {
+		$('#post').css({
+			position: 'fixed',
+			top: -($('h1').height()+25)
+		});
+		$('#board').css({
+			'margin-top': $('#post').height()+25
+		});
+	} else {
+		$('#post').css({
+			position: 'relative',
+			top: 0
+		});
+		$('#board').css({
+			'margin-top': 0
+		});
 	}
 });
 
@@ -133,16 +151,13 @@ function timeDifference(previous) {
 
 function displayPost(item) {
 	var date = new Date(item[0] * 1000).format('Y-m-d H:i') // YYYY-MM-DDTHH:MM
-	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>"); 
+	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a target=\"_blank\" class=\"no-emoticons\" href='$1'>$1</a>"); 
 }
 
 function resizeElm() {
 	$('#newPost').css('width', $('h1').width()-23);
 	
 };
-
-function turn() {
-}
 
 var exp         = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 var defaultLoad = parseInt($(window).height()/50);
@@ -152,6 +167,7 @@ var noPosts     = 0;
 $(document).ready(function () {
 	
 	$('#post h1').fitText();
+
 	resizeElm();
 	$(window).resize(resizeElm);
 	

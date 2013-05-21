@@ -22,9 +22,8 @@ body {
 #post {
 	z-index         : 1;
 	width           : inherit;
+	margin          : 0 auto;
 	background-color: @background_color;
-	position        : fixed;
-	top             : 0;
 	padding-bottom  : 20px;
 	background      : -webkit-gradient(        @webkit_gradient); /* Chrome,Safari4+ */
 	background      : -moz-linear-gradient(    @gradient);        /* FF3.6+ */
@@ -82,7 +81,6 @@ body {
 	margin : 10px auto;
 	border : 1px solid rgba(125, 125, 125, .5);
 }
-
 #board {
 	width: 100%;
 }
@@ -125,18 +123,18 @@ body {
 }
 @link_color: rgba(240, 230, 230, 1);
 #board li a {
-	color: @link_color;
+	color          : @link_color;
 	text-decoration: none;
-	position: relative;
+	position       : relative;
 }
 #board li a:after {
-	content: '';
-	position: absolute;
+	content      : '';
+	position     : absolute;
 	border-bottom: 1px dotted darken(@link_color, 20%);
-	bottom: 3px;
-	right: 0;
-	left: 0;
-	height: 0;
+	bottom       : 3px;
+	right        : 0;
+	left         : 0;
+	height       : 0;
 }
 #board li a:hover {
 	color: darken(@link_color, 20%);
