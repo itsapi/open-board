@@ -53,9 +53,27 @@ $(window).scroll(function() {
 	};
 
 	if($(window).scrollTop() > $(window).height()) {
-		$('div#top').css('bottom', 0);
+		$('#top').css('bottom', 0);
 	} else {
-		$('div#top').css('bottom', -50);
+		$('#top').css('bottom', -50);
+	}
+
+	if ($(window).scrollTop() > ($('h1').height()+25)) {
+		$('#post').css({
+			position: 'fixed',
+			top: -($('h1').height()+25)
+		});
+		$('#board').css({
+			'margin-top': $('#post').height()+25
+		});
+	} else {
+		$('#post').css({
+			position: 'relative',
+			top: 0
+		});
+		$('#board').css({
+			'margin-top': 0
+		});
 	}
 });
 
@@ -155,7 +173,7 @@ $(document).ready(function () {
 	setTimeout(function () {
 		$('#post h1').fitText();
 		resizeElm();
-	}, 200);
+	}, 1000);
 	
 	$('body').append('<div id="top"></div>');
 
