@@ -155,7 +155,7 @@ $(document).ready(function () {
 	setTimeout(function () {
 		$('#post h1').fitText();
 		resizeElm();
-	}, 1500);
+	}, 200);
 	
 	$('body').append('<div id="top"></div>');
 
