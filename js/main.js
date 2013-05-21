@@ -133,7 +133,7 @@ function timeDifference(previous) {
 
 function displayPost(item) {
 	var date = new Date(item[0] * 1000).format('Y-m-d H:i') // YYYY-MM-DDTHH:MM
-	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a class=\"no-emoticons\" href='$1'>$1</a>"); 
+	return ('<time datetime="' + date + '">' + timeDifference(item[0]) + '</time> ') + item[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp,"<a target="_blank" class=\"no-emoticons\" href='$1'>$1</a>"); 
 }
 
 function resizeElm() {
