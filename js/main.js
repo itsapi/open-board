@@ -150,12 +150,10 @@ var noLoaded    = 0;
 var noPosts     = 0;
 
 $(document).ready(function () {
-	$(window).resize(resizeElm);
 	
-	setTimeout(function () {
-		$('#post h1').fitText();
-		resizeElm();
-	}, 1500);
+	$('#post h1').fitText();
+	resizeElm();
+	$(window).resize(resizeElm);
 	
 	$('body').append('<div id="top"></div>');
 
