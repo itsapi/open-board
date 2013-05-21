@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+@import url(http://fonts.googleapis.com/css?family=Carrois+Gothic+SC);
 
 html {
 	width           : 100%;
@@ -58,7 +59,7 @@ body {
 	width         : 100%;
 	max-width     : 1000px;
 	margin        : 0.2em auto;
-
+	
 	@border       : 1px solid rgba(204, 204, 204, 1);
 	border-bottom : @border;
 	border-top    : @border;
@@ -68,10 +69,10 @@ body {
 	
 	text-align    : center;
 	color         : rgba(220, 220, 220, 1);
+	font-family   : 'Carrois Gothic SC', sans-serif;
 	font-size     : 0.5em;
 	font-weight   : 400;
-	font-variant  : small-caps;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.2em;
 }
 #post h1:hover {
 	text-shadow: 0 2px 3px rgba(187, 187, 187, 1);
@@ -122,6 +123,28 @@ body {
 	text-align: center;
 	width     : 100%;
 }
+@link_color: rgba(240, 230, 230, 1);
+#board li a {
+	color: @link_color;
+	text-decoration: none;
+	position: relative;
+}
+#board li a:after {
+	content: '';
+	position: absolute;
+	border-bottom: 1px dotted darken(@link_color, 20%);
+	bottom: 3px;
+	right: 0;
+	left: 0;
+	height: 0;
+}
+#board li a:hover {
+	color: darken(@link_color, 20%);
+}
+#board li a:visited {
+	color: lignten(@link_color, 20%);
+}
+
 #top {
 	position          : fixed;
 	cursor            : pointer;
