@@ -4,6 +4,7 @@
 
 html {
     width: 100%;
+    background-attachment: fixed !important;
     background: #e14b4b; /* Old browsers */
 	background: -moz-linear-gradient(top,  #e14b4b 0%, #ff2828 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e14b4b), color-stop(100%,#ff2828)); /* Chrome,Safari4+ */
