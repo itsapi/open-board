@@ -1,5 +1,5 @@
 <?
-	exec("sed -n " . $_GET['from'] . "," . $_GET['to'] . "p posts.txt", $out);
+    $out = slice(file('posts.txt'), $_GET['from'], $_GET['to']);
 
 	foreach ($out as $i => $post) {
 		$out[$i] = explode(':', $post, 2);
