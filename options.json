@@ -2,5 +2,5 @@
 	"replace-keys": false,
 	"grunt": false,
 	"output": "/var/www/projects/open_board",
-	"ignore": []
+	"ignore": ["posts.txt"]
 }
