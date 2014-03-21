@@ -6,14 +6,14 @@
 
 	if (filesize($file) != 0) {
 		$linecount = 0;
-		
+
 		$handle = fopen($file, "r");
 		while(!feof($handle)) {
 			$line = fgets($handle);
 			$linecount++;
 		}
 		fclose($handle);
-		
+
 		echo $linecount;
 	} else {
 		echo 0;
