@@ -88,15 +88,11 @@ function loadNew(first) {
                 var lineFrom = (fileLength-(fileLength-noPosts));
             };
             var lineTo = fileLength;
-            console.log('from: ', lineFrom)
-            console.log('to: ', lineTo)
             $.getJSON('getPosts.php', {
                 from: lineFrom,
                 to: lineTo
             }).done(function(posts) {
-                console.log(posts)
                 if (fileLength > noPosts) {
-                    console.log('loading')
                     $.each(posts, function (i, item) {
                         $('#board ul').prepend('<li>' + displayPost(item) + '</li>');
                         $('#board li:first-child').emoticonize();
