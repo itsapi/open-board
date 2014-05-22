@@ -23,33 +23,35 @@ function submitPost() {
 
 $(window).scroll(function() {
     if($(window).scrollTop() == $(document).height()-$(window).height()) {
-        $('#board ul').addClass('loading');
-        $.ajax({
-            url: 'noPosts.php',
-        }).done(function(noLines) {
-            totalLines = noLines;
-            if (noLoaded < noLines) {
-                if (totalLines-noLoaded < defaultLoad) {
-                    noLines = (totalLines-noLoaded);
-                } else {
-                    noLines = defaultLoad;
-                };
-                $.getJSON('getPosts.php', {
-                    from: (((totalLines-noLoaded-noLines-1) < 1) ? 1 : (totalLines-noLoaded-noLines-1)),
-                    to: (totalLines-noLoaded-1)
-                }).done(function(posts) {
-                    $.each(posts.reverse(), function (i, item) {
-                        $('#board ul').append('<li>' + displayPost(item) + '</li>');
-                        $('#board li:last-child').emoticonize();
-                        noLoaded++;
+        if (!$('#board ul').hasClass('loading')) {
+            $('#board ul').addClass('loading');
+            $.ajax({
+                url: 'noPosts.php',
+            }).done(function(noLines) {
+                totalLines = noLines;
+                if (noLoaded < noLines) {
+                    if (totalLines-noLoaded < defaultLoad) {
+                        noLines = (totalLines-noLoaded);
+                    } else {
+                        noLines = defaultLoad;
+                    };
+                    $.getJSON('getPosts.php', {
+                        from: (((totalLines-noLoaded-noLines-1) < 1) ? 1 : (totalLines-noLoaded-noLines-1)),
+                        to: (totalLines-noLoaded-1)
+                    }).done(function(posts) {
+                        $.each(posts.reverse(), function (i, item) {
+                            $('#board ul').append('<li>' + displayPost(item) + '</li>');
+                            $('#board li:last-child').emoticonize();
+                            noLoaded++;
+                        });
+                        $('#board li').emoticonize();
                     });
-                    $('#board li').emoticonize();
-                });
-                $('#board ul').removeClass('loading');
-            } else {
-                $('#board ul').addClass('empty');
-            };
-        });
+                    $('#board ul').removeClass('loading');
+                } else {
+                    $('#board ul').addClass('empty');
+                };
+            });
+        }
     };
 
     if($(window).scrollTop() > $(window).height()) {
