@@ -1,4 +1,4 @@
 {
-	"output": "/var/www/projects/open_board",
+	"copy_to": "/var/www/projects/open_board",
 	"ignore": ["posts.txt"]
 }
